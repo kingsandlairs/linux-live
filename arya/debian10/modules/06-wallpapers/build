@@ -1,0 +1,16 @@
+# Arya uses wallpaper from /usr/share/wallpapers/slax_wallpeper.jpg
+# So we are going to replace this file
+# First, create a temporary module tree
+# Note that the directory itself has .sb extension
+DIR=/tmp/wallpaper.sb
+mkdir $DIR
+mkdir -p $DIR/usr/share/wallpapers/
+
+# Now copy wallpaper file to that directory
+cat logo.jpg > $DIR/usr/share/wallpapers/logo.jpg
+
+# Finally, convert the module directory to a file
+# The directory will be erased and module file with the same name will be created
+dir2sb $DIR
+
+savechanges  /06-wallpapers.sb

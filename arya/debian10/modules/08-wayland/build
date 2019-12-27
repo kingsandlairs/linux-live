@@ -1,0 +1,11 @@
+#!/bin/bash
+
+apt-get update
+
+apt-get -y build-essential weston mutter 
+
+#run mutter
+
+mutter --nested --wayland 
+
+savechanges /08-wayland
