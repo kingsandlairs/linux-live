@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# First, we boot fresh Slax and try apt
+apt install firefox
+
+# As you can see, there is no package called 'firefox'. Lets try to search for the word
+apt search firefox | more
+
+# Ah, now we get something. The package is called firefox-esr. So lets install it
+apt install firefox-esr
+
+# We want it called just Firefox, so lets edit the desktop file responsible for the name
+sed -i -r "s/^Name=FireFox ESR/Name=Firefox/" /usr/share/applications/firefox-esr.desktop
+
+# Now save the newly installed software including our changes to a module
+# In our example, the module will be saved in current directory
+savechanges firefox.sb
+
+# If we are running from readonly CD, we can create a new ISO with our module
+# Then just burn the ISO to new CD and Firefox will be available when you boot it
+# In our example, the ISO file will be created in current directory
+genslaxiso slax.iso firefox.sb
+
+# If we are running Slax from USB drive, we can put it directly to modules folder
+# and that's it, firefox will be available after reboot
+mv firefox.sb /run/initramfs/memory/data/slax/modules/
